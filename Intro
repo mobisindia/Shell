@@ -108,7 +108,13 @@ ex- echo "Rajula Brahmananda Reddy condition was successfully completed"   # thi
 
 multi line comments ->
 ----------------------
-
+#!bin/bash
+<< chinna
+echo "Rajula Brahmannada Reddy"
+echo "I am from mobis"
+chinna
+date
+uptime -p
 
 
 
