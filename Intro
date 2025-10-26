@@ -1,1 +1,122 @@
 SHELLS SCript for beginners
+------------------------------------------------------------
+What is Shell ?
+A shell is a program that acts as a bridge between you and the operating system (OS kernel).
+It takes user commands, sends them to the OS(kernal) to execute, and then shows you the output.
+
+ex -
+You ->  talk to the shell
+Shell ->  talks to the OS kernel
+OS kernel -> talks to hardware (CPU, memory, etc.)
+
+------------------------------------------------------------
+
+Why shellscript ?
+
+using shell script to automatic the manual work and reteated tasks.
+
+------------------------------------------------------------
+Where to use shell ?
+
+whereever in the real word to automate the process not only devops ,ai ,Python ,big data,data analytics.
+------------------------------------------------------------
+
+What is sheel script ?
+
+group of linux commands in a single script file. shell script will excecute the top to bottom.
+
+------------------------------------------------------------
+
+IF you want know the which shell commands u are using in a linux .enter below command .
+
+echo $SHELL
+echo $0
+echo $$
+
+
+--------------------------------------------------------------
+Bydefault extension of shell script is .sh
+
+--------------------------------------------------------------
+
+if you want to run the shell script ?
+
+sh <file name>.sh
+./ <filename>.sh
+.<filename>.sh
+
+--------------------------------------------------------------
+
+
+basic shell script example -
+
+1) vi tmpe.sh
+
+2) Enter i -> INSERT MODE
+
+3) Write a script which are you try to write .
+
+ex - 
+#!bin/bash
+
+echo "Rajula Brahmannada Reddy"
+
+echo "I am from mobis"
+
+date
+
+uptime -p
+
+4) Enter :WQ 
+
+5) sh tmpe.sh (or) ./ tmpe.sh (or) . tmpe.sh
+
+ *** if you want to debug the script file enter below command -
+
+6) echo -x tmpe.sh
+
+---------------------------------------------------------------
+
+Topic 1
+
+types of commands -
+
+single line commnets 
+inline comments 
+multi line comments 
+
+NOTE -
+Comment is defined using HASH($) symbol 
+
+single line comments -
+-----------------------
+#!bin/bash
+echo "Rajula Brahmananda Reddy"
+
+if you dont want to display the data using Hash symbol to skip the command.
+#date 
+
+pwd
+echo "Welcome to mobis"
+sleep 10
+
+inline commants -
+---------------------
+using inline commands to explaine the purpose to written line .
+
+ex- echo "Rajula Brahmananda Reddy condition was successfully completed"   # this condition for right person accessed or not.
+
+multi line comments ->
+----------------------
+
+
+
+
+
+
+
+
+
+
+
+
