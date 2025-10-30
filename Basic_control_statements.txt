@@ -1,1 +1,316 @@
-FDFDdfgdfg
+
+What Are Conditions in Shell Script?
+
+A **condition** helps your script **decide** what to do based on some test.
+
+Example:
+“If a file exists → print ‘found’
+else → print ‘not found’.”
+
+Conditions use **`if`**, **`elif`**, and **`else`** statements.
+
+---
+Basic Syntax of `if` Statement
+
+```bash
+if [ condition ]
+then
+    # commands to execute if condition is true
+fi
+```
+ **Important Rules:**
+
+* `[ ]` → used to test a condition.
+* Always put **spaces** after `[` and before `]`.
+* `then` can be on a new line **or** after `;`.
+
+Example:
+
+```bash
+if [ $a -gt $b ]; then
+    echo "a is greater"
+fi
+```
+
+---
+
+ 1. Simple `if` Condition
+
+```bash
+#!/bin/bash
+a=10
+b=5
+
+if [ $a -gt $b ]
+then
+    echo "$a is greater than $b"
+fi
+```
+
+Output:
+
+```
+10 is greater than 5
+```
+
+---
+ 2. `if-else` Condition
+
+```bash
+#!/bin/bash
+a=3
+b=7
+
+if [ $a -gt $b ]
+then
+    echo "$a is greater"
+else
+    echo "$a is smaller"
+fi
+```
+
+Output:
+
+```
+3 is smaller
+```
+
+---
+ 3. `if-elif-else` Condition
+
+Used when you have **multiple conditions**.
+
+```bash
+#!/bin/bash
+a=10
+b=10
+
+if [ $a -gt $b ]
+then
+    echo "a is greater"
+elif [ $a -lt $b ]
+then
+    echo "a is smaller"
+else
+    echo "Both are equal"
+fi
+```
+
+ Output:
+
+```
+Both are equal
+```
+
+---
+4. Nested `if` Statements
+
+You can place one `if` inside another.
+
+```bash
+#!/bin/bash
+a=10
+b=20
+c=15
+
+if [ $a -lt $b ]
+then
+    if [ $b -gt $c ]
+    then
+        echo "b is largest"
+    fi
+fi
+```
+
+---
+ 5. Logical Operators in Conditions
+
+You can combine conditions using **AND (&&)** and **OR (||)**.
+
+### Example: AND (`&&`)
+
+Both conditions must be true.
+
+```bash
+#!/bin/bash
+a=10
+b=20
+
+if [ $a -gt 0 ] && [ $b -gt 0 ]
+then
+    echo "Both numbers are positive"
+fi
+```
+
+### Example: OR (`||`)
+
+At least one condition must be true.
+
+```bash
+#!/bin/bash
+a=10
+b=-5
+
+if [ $a -gt 0 ] || [ $b -gt 0 ]
+then
+    echo "At least one number is positive"
+fi
+```
+
+---
+
+6. String Conditions
+
+Used to compare **text (strings)**.
+
+```bash
+#!/bin/bash
+name="Reddy"
+
+if [ "$name" = "Reddy" ]
+then
+    echo "Matched"
+else
+    echo "Not matched"
+fi
+```
+
+### Useful string checks:
+
+| Operator | Description  | Example            |
+| -------- | ------------ | ------------------ |
+| `=`      | Equal        | `[ "$a" = "$b" ]`  |
+| `!=`     | Not Equal    | `[ "$a" != "$b" ]` |
+| `-z`     | Empty string | `[ -z "$a" ]`      |
+| `-n`     | Not empty    | `[ -n "$a" ]`      |
+
+---
+ 7. File Test Conditions
+
+You can check file existence, permissions, or type.
+
+```bash
+#!/bin/bash
+file="test.txt"
+
+if [ -e "$file" ]
+then
+    echo "File exists"
+else
+    echo "File not found"
+fi
+```
+
+### Common File Operators:
+
+| Operator | Meaning        |
+| -------- | -------------- |
+| `-e`     | File exists    |
+| `-f`     | Regular file   |
+| `-d`     | Directory      |
+| `-r`     | Readable       |
+| `-w`     | Writable       |
+| `-x`     | Executable     |
+| `-s`     | File not empty |
+
+---
+
+8. Using `[[ ... ]]` (Modern Syntax)
+
+`[[ ]]` is an advanced test command (bash only) that supports pattern matching and no need to escape special characters.
+
+Example:
+
+```bash
+#!/bin/bash
+name="Reddy"
+
+if [[ $name == R* ]]
+then
+    echo "Name starts with R"
+fi
+```
+ Features:
+
+* No word-splitting issues.
+* Supports `&&` and `||` inside brackets.
+
+---
+ 9. Using `case` for Multiple Choices
+
+When you have **many options**, `case` is cleaner than `if`.
+
+```bash
+#!/bin/bash
+echo "Enter number (1-3): "
+read num
+
+case $num in
+    1)
+        echo "You selected One"
+        ;;
+    2)
+        echo "You selected Two"
+        ;;
+    3)
+        echo "You selected Three"
+        ;;
+    *)
+        echo "Invalid number"
+        ;;
+esac
+```
+
+Output:
+
+```
+Enter number (1-3):
+2
+You selected Two
+```
+
+---
+
+# 🔸 10. Example: Real-Life Script
+
+Here’s a mini program that checks file status:
+
+```bash
+#!/bin/bash
+echo "Enter filename:"
+read file
+
+if [ -f "$file" ]
+then
+    echo "It's a regular file."
+elif [ -d "$file" ]
+then
+    echo " It's a directory."
+else
+    echo " File or directory not found."
+fi
+```
+
+---
+
+#  Summary Table
+
+| Type      | Syntax Example                      | Description                   |
+| --------- | ----------------------------------- | ----------------------------- |
+| Simple if | `if [ $a -gt 5 ]; then echo hi; fi` | Executes if condition is true |
+| if-else   | Adds “otherwise” block              |                               |
+| elif      | Multiple conditions                 |                               |
+| Nested if | One inside another                  |                               |
+| case      | Multiple pattern matches            |                               |
+| && / ||   | Combine conditions                  |                               |
+
+---
+
+#  Tips for Beginners
+
+Always leave **spaces** after `[` and before `]`.
+Use **`[[ ... ]]`** for modern scripts.
+Use **`bash -x script.sh`** to debug.
+Quote variables: `"$var"` to avoid errors.
+Test your logic with `echo` statements.
+
