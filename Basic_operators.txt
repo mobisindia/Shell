@@ -1,1 +1,226 @@
-feef
+
+
+ What is a Shell Script?
+
+A **shell script** is a text file containing a series of commands for the Linux/Unix shell (like `bash`, `sh`, or `zsh`) to execute.
+Operators are symbols or words that perform operations on values or variables — just like `+`, `-`, `*`, `/` in math.
+
+---
+ What Are Operators in Shell?
+
+Operators are used to perform operations — arithmetic, logical, relational, etc.
+
+Let’s explore **each type one by one** with examples.
+
+---
+
+1. Arithmetic Operators
+
+Used for **numeric calculations**.
+
+| Operator | Meaning             | Example                                                   |
+| -------- | ------------------- | --------------------------------------------------------- |
+| `+`      | Addition            | `expr 2 + 3` → `5`                                        |
+| `-`      | Subtraction         | `expr 5 - 2` → `3`                                        |
+| `*`      | Multiplication      | `expr 4 \* 3` → `12` (note: `*` must be escaped with `\`) |
+| `/`      | Division            | `expr 10 / 2` → `5`                                       |
+| `%`      | Modulus (remainder) | `expr 7 % 3` → `1`                                        |
+
+Example:
+
+```bash
+#!/bin/bash
+a=10
+b=5
+
+sum=$((a + b))
+echo "Sum = $sum"
+
+diff=$((a - b))
+echo "Difference = $diff"
+
+product=$((a * b))
+echo "Product = $product"
+
+quotient=$((a / b))
+echo "Quotient = $quotient"
+```
+
+ Note:
+
+* `$((expression))` is the preferred modern way for arithmetic in bash.
+* `expr` is an older method.
+
+---
+
+ 2. Relational Operators
+
+Used for **comparing numbers** (not strings).
+
+| Operator | Description              | Example (returns true/false) |
+| -------- | ------------------------ | ---------------------------- |
+| `-eq`    | Equal to                 | `[ $a -eq $b ]`              |
+| `-ne`    | Not equal to             | `[ $a -ne $b ]`              |
+| `-gt`    | Greater than             | `[ $a -gt $b ]`              |
+| `-lt`    | Less than                | `[ $a -lt $b ]`              |
+| `-ge`    | Greater than or equal to | `[ $a -ge $b ]`              |
+| `-le`    | Less than or equal to    | `[ $a -le $b ]`              |
+
+Example:
+
+```bash
+#!/bin/bash
+a=10
+b=20
+
+if [ $a -lt $b ]
+then
+  echo "$a is less than $b"
+fi
+```
+
+---
+
+3. String Operators
+
+Used for **comparing strings** or checking if they are empty.
+
+| Operator | Description                     | Example            |
+| -------- | ------------------------------- | ------------------ |
+| `=`      | Equal                           | `[ "$a" = "$b" ]`  |
+| `!=`     | Not equal                       | `[ "$a" != "$b" ]` |
+| `-z`     | True if string is **empty**     | `[ -z "$a" ]`      |
+| `-n`     | True if string is **not empty** | `[ -n "$a" ]`      |
+| `str`    | True if string is **not null**  | `[ "$a" ]`         |
+
+Example:
+
+```bash
+#!/bin/bash
+name="Reddy"
+
+if [ "$name" = "Reddy" ]; then
+  echo "Matched!"
+else
+  echo "Not matched!"
+fi
+```
+
+---
+
+4. Logical Operators
+
+Used to **combine multiple conditions** (like `AND`, `OR`, `NOT`).
+
+| Operator | Description             | Example                        |                       |               |   |               |
+| -------- | ----------------------- | ------------------------------ | --------------------- | ------------- | - | ------------- |
+| `&&`     | Logical AND (both true) | `[ $a -gt 0 ] && [ $b -gt 0 ]` |                       |               |   |               |
+| `        |                         | `                              | Logical OR (one true) | `[ $a -gt 0 ] |   | [ $b -gt 0 ]` |
+| `!`      | Logical NOT (negate)    | `[ ! $a -gt 0 ]`               |                       |               |   |               |
+
+ Example:
+
+```bash
+#!/bin/bash
+a=10
+b=20
+
+if [ $a -gt 0 ] && [ $b -gt 0 ]
+then
+  echo "Both are positive numbers"
+fi
+```
+
+---
+
+5. File Test Operators
+
+Used to **check file properties** like existence, type, permissions, etc.
+
+| Operator | Description       | Example           |
+| -------- | ----------------- | ----------------- |
+| `-e`     | File exists       | `[ -e file.txt ]` |
+| `-f`     | Regular file      | `[ -f file.txt ]` |
+| `-d`     | Directory         | `[ -d /home ]`    |
+| `-r`     | File readable     | `[ -r file.txt ]` |
+| `-w`     | File writable     | `[ -w file.txt ]` |
+| `-x`     | File executable   | `[ -x file.txt ]` |
+| `-s`     | File is not empty | `[ -s file.txt ]` |
+
+Example:
+
+```bash
+#!/bin/bash
+file="test.txt"
+
+if [ -f "$file" ]; then
+  echo "File exists"
+else
+  echo "File not found"
+fi
+```
+
+---
+ 6. Assignment Operators
+
+Used to **assign values** to variables.
+
+| Operator | Example | Meaning              |
+| -------- | ------- | -------------------- |
+| `=`      | `a=10`  | Assign value 10 to a |
+| `+=`     | `a+=5`  | a = a + 5            |
+| `-=`     | `a-=3`  | a = a - 3            |
+| `*=`     | `a*=2`  | a = a * 2            |
+| `/=`     | `a/=2`  | a = a / 2            |
+| `%=`     | `a%=3`  | a = a % 3            |
+
+Example:
+
+```bash
+#!/bin/bash
+a=10
+((a += 5))
+echo "After addition: $a"
+```
+
+---
+
+7. Bitwise Operators (For Advanced Use)
+
+Operate on binary bits of numbers.
+
+| Operator | Meaning     | Example      |      |      |
+| -------- | ----------- | ------------ | ---- | ---- |
+| `&`      | Bitwise AND | `((a & b))`  |      |      |
+| `        | `           | Bitwise OR   | `((a | b))` |
+| `^`      | Bitwise XOR | `((a ^ b))`  |      |      |
+| `~`      | Bitwise NOT | `((~a))`     |      |      |
+| `<<`     | Left shift  | `((a << 1))` |      |      |
+| `>>`     | Right shift | `((a >> 1))` |      |      |
+
+---
+ Summary for Absolute Beginners
+
+| Category   | Used For           | Example                        |
+| ---------- | ------------------ | ------------------------------ |
+| Arithmetic | Math operations    | `$((a + b))`                   |
+| Relational | Number comparison  | `[ $a -gt $b ]`                |
+| String     | Text comparison    | `[ "$a" = "$b" ]`              |
+| Logical    | Combine conditions | `[ $a -gt 0 ] && [ $b -lt 5 ]` |
+| File Test  | Check files        | `[ -f file.txt ]`              |
+| Assignment | Change values      | `a+=5`                         |
+
+---
+
+# Pro Tip:
+
+* Always put spaces inside `[ ]` — `[ $a -gt $b ]` ✅
+  Not `[ $a-gt$b ]` ❌
+* For arithmetic use:
+  ✅ `$((a + b))` instead of old `expr`
+* To debug your script, run:
+
+  ```bash
+  bash -x script.sh
+  ```
+
